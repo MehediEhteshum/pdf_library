@@ -8,14 +8,22 @@ import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf
 import 'package:pdf_library/features/pdf/presentation/widgets/custom_back_button.dart';
 import 'package:pdfx/pdfx.dart';
 
-class ViewPdf extends StatelessWidget {
+class ViewPdf extends StatefulWidget {
   const ViewPdf({super.key});
+
+  @override
+  State<ViewPdf> createState() => _ViewPdfState();
+}
+
+class _ViewPdfState extends State<ViewPdf> {
+  bool hasDocumentError = false;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemotePdfBloc>(
       create: (context) => sl<RemotePdfBloc>()
-        ..add(const GetRemotePdfEvent("https://www.pdf995.com/samples/pd.pdf")),
+        ..add(
+            const GetRemotePdfEvent("https://www.pdf995.com/samples/pdf.pdf")),
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
@@ -41,9 +49,10 @@ class ViewPdf extends StatelessWidget {
           );
         }
 
-        if (state is RemotePdfErrorState) {
+        if (state is RemotePdfErrorState || hasDocumentError) {
           return const Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.error,
@@ -59,9 +68,15 @@ class ViewPdf extends StatelessWidget {
         if (state is RemotePdfReadyState) {
           PdfController pdfController =
               PdfController(document: PdfDocument.openData(state.pdf!.data!));
+
           return PdfView(
             controller: pdfController,
             scrollDirection: Axis.vertical,
+            onDocumentError: (_) {
+              setState(() {
+                hasDocumentError = true;
+              });
+            },
           );
         }
 
