@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_library/core/constants/constants.dart';
 import 'package:pdf_library/features/pdf/presentation/pages/home.dart';
 import 'package:pdf_library/features/pdf/presentation/pages/pdf_library.dart';
 import 'package:pdf_library/features/pdf/presentation/pages/view_pdf.dart';
@@ -6,11 +7,11 @@ import 'package:pdf_library/features/pdf/presentation/pages/view_pdf.dart';
 class AppRoutes {
   static Route onGenerateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case "/":
+      case homeRoute:
         return _materialPageRoute(const Home(), routeSettings);
-      case "/view_pdf":
+      case viewPdfRoute:
         return _materialPageRoute(const ViewPdf(), routeSettings);
-      case "/pdf_library":
+      case pdfLibraryRoute:
         return _materialPageRoute(const PdfLibrary(), routeSettings);
       default:
         return _materialPageRoute(const Home(), routeSettings);

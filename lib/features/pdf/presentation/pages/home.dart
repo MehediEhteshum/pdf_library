@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_library/core/constants/constants.dart';
 import 'package:pdf_library/features/pdf/presentation/widgets/pdf_library_button.dart';
 
 class Home extends StatelessWidget {
@@ -34,7 +35,7 @@ class Home extends StatelessWidget {
   void _navigate(BuildContext context) {
     Navigator.pushNamed(
       context,
-      "/view_pdf",
+      viewPdfRoute,
     );
   }
 }

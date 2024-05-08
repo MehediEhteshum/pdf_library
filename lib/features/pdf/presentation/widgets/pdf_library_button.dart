@@ -54,7 +54,7 @@ class _PdfLibraryButtonState extends State<PdfLibraryButton>
     _animationController.forward().then((_) {
       Navigator.pushNamed(
         context,
-        "/pdf_library",
+        pdfLibraryRoute,
       );
       _animationController.reset();
     });
