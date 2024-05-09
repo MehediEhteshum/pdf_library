@@ -39,7 +39,7 @@ class PdfRepoImpl implements PdfRepo {
   }
 
   @override
-  Future<void> savePdf(PdfEntity pdf) {
-    throw UnimplementedError();
+  Future<void> savePdf(PdfEntity pdf) async {
+    await _localPdfService.savePdf(PdfModel.fromEntity(pdf));
   }
 }

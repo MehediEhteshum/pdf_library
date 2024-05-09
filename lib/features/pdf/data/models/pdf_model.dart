@@ -8,4 +8,14 @@ class PdfModel extends PdfEntity {
     super.data,
     super.isSaved,
   });
+
+  factory PdfModel.fromEntity(PdfEntity pdf) {
+    return PdfModel(
+      url: pdf.url,
+      name: pdf.name,
+      fileLocation: pdf.fileLocation,
+      data: pdf.data,
+      isSaved: pdf.isSaved,
+    );
+  }
 }
