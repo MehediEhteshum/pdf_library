@@ -6,8 +6,8 @@ abstract class PdfRepo {
   Future<DataState<PdfEntity>> getRemotePdf(String url);
 
   // local
-  Future<List<PdfEntity>> getSavedPdfs();
-  Future<PdfEntity> getSavedPdf(String url);
+  List<PdfEntity> getSavedPdfs();
+  PdfEntity getSavedPdf(String url);
   Future<void> savePdf(PdfEntity article);
   Future<void> deletePdf(String url);
 }

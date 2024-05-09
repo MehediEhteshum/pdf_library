@@ -57,5 +57,6 @@ class _UrlInputState extends State<UrlInput> {
       viewPdfRoute,
       arguments: textEditingController.text,
     );
+    textEditingController.text = "";
   }
 }

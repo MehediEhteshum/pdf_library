@@ -1,4 +1,5 @@
 import 'package:pdf_library/core/resources/data_state.dart';
+import 'package:pdf_library/features/pdf/data/data_sources/local/local_pdf_service.dart';
 import 'package:pdf_library/features/pdf/data/data_sources/remote/pdf_url_service.dart';
 import 'package:pdf_library/features/pdf/data/models/pdf_model.dart';
 import 'package:pdf_library/features/pdf/domain/entities/pdf_entity.dart';
@@ -6,8 +7,9 @@ import 'package:pdf_library/features/pdf/domain/repositories/pdf_repo.dart';
 
 class PdfRepoImpl implements PdfRepo {
   final PdfUrlService _pdfUrlService;
+  final LocalPdfService _localPdfService;
 
-  PdfRepoImpl(this._pdfUrlService);
+  PdfRepoImpl(this._pdfUrlService, this._localPdfService);
 
   // remote
   @override
@@ -22,17 +24,17 @@ class PdfRepoImpl implements PdfRepo {
 
   // local
   @override
+  List<PdfModel> getSavedPdfs() {
+    return _localPdfService.getSavedPdfs();
+  }
+
+  @override
+  PdfModel getSavedPdf(String url) {
+    return _localPdfService.getSavedPdf(url);
+  }
+
+  @override
   Future<void> deletePdf(String url) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<PdfModel> getSavedPdf(String url) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<PdfModel>> getSavedPdfs() {
     throw UnimplementedError();
   }
 
