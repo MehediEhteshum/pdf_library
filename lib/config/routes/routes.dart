@@ -10,7 +10,8 @@ class AppRoutes {
       case homeRoute:
         return _materialPageRoute(const Home(), routeSettings);
       case viewPdfRoute:
-        return _materialPageRoute(const ViewPdf(), routeSettings);
+        return _materialPageRoute(
+            ViewPdf(pdfUrl: routeSettings.arguments as String), routeSettings);
       case pdfLibraryRoute:
         return _materialPageRoute(const PdfLibrary(), routeSettings);
       default:

@@ -9,7 +9,9 @@ import 'package:pdf_library/features/pdf/presentation/widgets/custom_back_button
 import 'package:pdfx/pdfx.dart';
 
 class ViewPdf extends StatefulWidget {
-  const ViewPdf({super.key});
+  const ViewPdf({super.key, required this.pdfUrl});
+
+  final String pdfUrl;
 
   @override
   State<ViewPdf> createState() => _ViewPdfState();
@@ -21,9 +23,8 @@ class _ViewPdfState extends State<ViewPdf> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<RemotePdfBloc>(
-      create: (context) => sl<RemotePdfBloc>()
-        ..add(
-            const GetRemotePdfEvent("https://www.pdf995.com/samples/pdf.pdf")),
+      create: (context) =>
+          sl<RemotePdfBloc>()..add(GetRemotePdfEvent(widget.pdfUrl)),
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),

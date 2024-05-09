@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_library/core/constants/constants.dart';
 import 'package:pdf_library/features/pdf/presentation/widgets/pdf_library_button.dart';
+import 'package:pdf_library/features/pdf/presentation/widgets/url_input.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -26,16 +26,8 @@ class Home extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () => _navigate(context),
-      child: const Text("VIEW"),
-    );
-  }
-
-  void _navigate(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      viewPdfRoute,
+    return const Center(
+      child: UrlInput(),
     );
   }
 }
