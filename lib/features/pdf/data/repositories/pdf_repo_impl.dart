@@ -25,7 +25,7 @@ class PdfRepoImpl implements PdfRepo {
   // local
   @override
   List<PdfModel> getSavedPdfs() {
-    return _localPdfService.getSavedPdfs();
+    return _localPdfService.getSavedPdfList();
   }
 
   @override
@@ -34,8 +34,8 @@ class PdfRepoImpl implements PdfRepo {
   }
 
   @override
-  Future<void> deletePdf(String url) {
-    throw UnimplementedError();
+  Future<void> deleteSavedPdf(String url) async {
+    await _localPdfService.deleteSavedPdf(url);
   }
 
   @override

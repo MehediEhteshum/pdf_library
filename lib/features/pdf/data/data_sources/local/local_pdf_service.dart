@@ -10,7 +10,7 @@ class LocalPdfService {
 
   LocalPdfService(this._sharedPreferences);
 
-  List<PdfModel> getSavedPdfs() {
+  List<PdfModel> getSavedPdfList() {
     List<String>? pdfKeyList = _sharedPreferences.getStringList('pdf_key_list');
     if (pdfKeyList!.isNotEmpty) {
       List<PdfModel> pdfList = pdfKeyList.map<PdfModel>((pdfKey) {
@@ -48,8 +48,18 @@ class LocalPdfService {
     return PdfModel(url: url, isSaved: false);
   }
 
-  Future<void> deletePdf(String url) {
-    throw UnimplementedError();
+  Future<void> deleteSavedPdf(String url) async {
+    String pdfKey = sha1.convert(utf8.encode(url)).toString();
+    var pdfValue = _sharedPreferences.getString(pdfKey);
+    if (pdfValue != null) {
+      var pdfJson = jsonDecode(pdfValue);
+      bool fileExists = await File(pdfJson["fileLocation"].toString()).exists();
+      if (fileExists) {
+        // delete the file
+        await File(pdfJson["fileLocation"].toString()).delete();
+      }
+    }
+    await _sharedPreferences.remove(pdfKey);
   }
 
   Future<void> savePdf(PdfModel pdf) async {

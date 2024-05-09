@@ -10,6 +10,6 @@ class DeleteSavedPdfUseCase implements UseCase<void, String> {
 
   @override
   FutureOr<void> call({String? params}) async {
-    await _pdfRepo.deletePdf(params!);
+    await _pdfRepo.deleteSavedPdf(params!);
   }
 }

@@ -9,5 +9,5 @@ abstract class PdfRepo {
   List<PdfEntity> getSavedPdfs();
   Future<PdfEntity> getSavedPdf(String url);
   Future<void> savePdf(PdfEntity pdf);
-  Future<void> deletePdf(String url);
+  Future<void> deleteSavedPdf(String url);
 }
