@@ -3,9 +3,11 @@ import 'package:pdf_library/features/pdf/data/data_sources/local/local_pdf_servi
 import 'package:pdf_library/features/pdf/data/data_sources/remote/pdf_url_service.dart';
 import 'package:pdf_library/features/pdf/data/repositories/pdf_repo_impl.dart';
 import 'package:pdf_library/features/pdf/domain/repositories/pdf_repo.dart';
+import 'package:pdf_library/features/pdf/domain/usecases/delete_saved_pdf.dart';
 import 'package:pdf_library/features/pdf/domain/usecases/get_remote_pdf.dart';
 import 'package:pdf_library/features/pdf/domain/usecases/get_saved_pdf.dart';
 import 'package:pdf_library/features/pdf/domain/usecases/get_saved_pdflist.dart';
+import 'package:pdf_library/features/pdf/domain/usecases/save_pdf.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_bloc.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,6 +29,8 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<GetRemotePdfUseCase>(GetRemotePdfUseCase(sl()));
   sl.registerSingleton<GetSavedPdfListUseCase>(GetSavedPdfListUseCase(sl()));
   sl.registerSingleton<GetSavedPdfUseCase>(GetSavedPdfUseCase(sl()));
+  sl.registerSingleton<SavePdfUseCase>(SavePdfUseCase(sl()));
+  sl.registerSingleton<DeleteSavedPdfUseCase>(DeleteSavedPdfUseCase(sl()));
 
   // blocs
   sl.registerFactory<RemotePdfBloc>(() => RemotePdfBloc(sl()));
