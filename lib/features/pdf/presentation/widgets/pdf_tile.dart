@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pdf_library/config/routes/view_pdf_args.dart';
 import 'package:pdf_library/core/constants/constants.dart';
 import 'package:pdf_library/features/pdf/domain/entities/pdf_entity.dart';
 
@@ -70,7 +69,7 @@ class _PdfTileState extends State<PdfTile> with SingleTickerProviderStateMixin {
       Navigator.pushNamed(
         context,
         viewPdfRoute,
-        arguments: ViewPdfArgs(null, widget.pdf),
+        arguments: widget.pdf,
       );
       _animationController.reset();
     });

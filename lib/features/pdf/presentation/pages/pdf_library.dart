@@ -33,7 +33,7 @@ class PdfLibrary extends StatelessWidget {
 
   Widget _buildBody() => BlocBuilder<LocalPdfBloc, LocalPdfState>(
         builder: (context, state) {
-          if (state is LocalPdfListLoadingState) {
+          if (state is LocalPdfLoadingState) {
             return const Center(
               child: CupertinoActivityIndicator(
                 radius: kToolbarHeight,

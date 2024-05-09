@@ -42,10 +42,10 @@ class LocalPdfService {
         );
       } else {
         await _sharedPreferences.remove(pdfKey);
-        return const PdfModel(isSaved: false);
+        return PdfModel(url: url, isSaved: false);
       }
     }
-    return const PdfModel(isSaved: false);
+    return PdfModel(url: url, isSaved: false);
   }
 
   Future<void> deletePdf(String url) {

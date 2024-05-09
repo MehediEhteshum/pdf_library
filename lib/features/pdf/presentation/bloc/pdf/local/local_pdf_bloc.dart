@@ -17,7 +17,7 @@ class LocalPdfBloc extends Bloc<LocalPdfEvent, LocalPdfState> {
 
   LocalPdfBloc(this._getSavedPdfListUseCase, this._getSavedPdfUseCase,
       this._savePdfUseCase, this._deleteSavedPdfUseCase)
-      : super(const LocalPdfListLoadingState()) {
+      : super(const LocalPdfLoadingState()) {
     on<GetLocalPdfListEvent>(onGetLocalPdfListEvent);
     on<GetLocalPdfEvent>(onGetLocalPdfEvent);
     on<SaveLocalPdfEvent>(onSaveLocalPdfEvent);

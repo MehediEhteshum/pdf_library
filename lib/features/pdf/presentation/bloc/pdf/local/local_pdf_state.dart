@@ -11,8 +11,8 @@ abstract class LocalPdfState extends Equatable {
   List<Object?> get props => [pdf, pdfList];
 }
 
-class LocalPdfListLoadingState extends LocalPdfState {
-  const LocalPdfListLoadingState();
+class LocalPdfLoadingState extends LocalPdfState {
+  const LocalPdfLoadingState();
 }
 
 class LocalPdfReadyState extends LocalPdfState {

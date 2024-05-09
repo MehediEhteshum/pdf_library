@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pdf_library/features/pdf/data/data_sources/local/local_pdf_service.dart';
 import 'package:pdf_library/features/pdf/data/data_sources/remote/pdf_url_service.dart';
@@ -20,6 +23,29 @@ Future<void> initializeDependencies() async {
       await SharedPreferences.getInstance();
   await sharedPreferences.setStringList('pdf_key_list', <String>[]);
   sl.registerSingleton<SharedPreferences>(sharedPreferences);
+
+  // Test
+  var url1 = sha1
+      .convert(utf8.encode("https://www.pdf995.com/samples/pdf.pdf"))
+      .toString();
+  var url2 = sha1.convert(utf8.encode("url2")).toString();
+  await sharedPreferences.setStringList('pdf_key_list', <String>[url1, url2]);
+  var x = {
+    "url": "https://www.pdf995.com/samples/pdf.pdf",
+    "name": "s1",
+    "fileLocation": "C:/Users/Oshan/Downloads/Documents/s1.pdf",
+    "isSaved": true
+  };
+  var y = {
+    "url": "url2",
+    "name": "s2",
+    "fileLocation": "C:/Users/Oshan/Downloads/Documents/s2.pdf",
+    "isSaved": true
+  };
+  await sharedPreferences.setString(url1, jsonEncode(x));
+  await sharedPreferences.setString(url2, jsonEncode(y));
+
+  // Test
 
   sl.registerSingleton<PdfUrlService>(PdfUrlService());
   sl.registerSingleton<LocalPdfService>(LocalPdfService(sl()));
