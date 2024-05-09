@@ -1,14 +1,19 @@
 import 'package:get_it/get_it.dart';
+import 'package:pdf_library/features/pdf/data/data_sources/local/local_pdf_service.dart';
 import 'package:pdf_library/features/pdf/data/data_sources/remote/pdf_url_service.dart';
 import 'package:pdf_library/features/pdf/data/repositories/pdf_repo_impl.dart';
 import 'package:pdf_library/features/pdf/domain/repositories/pdf_repo.dart';
 import 'package:pdf_library/features/pdf/domain/usecases/get_remote_pdf.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // service locator global instance
 final sl = GetIt.instance;
 
-void initializeDependencies() {
+Future<void> initializeDependencies() async {
+  final SharedPreferences? sharedPreferences = await LocalPdfService.init();
+  sl.registerSingleton<SharedPreferences>(sharedPreferences!);
+
   sl.registerSingleton<PdfUrlService>(PdfUrlService());
   sl.registerSingleton<PdfRepo>(PdfRepoImpl(sl()));
 
