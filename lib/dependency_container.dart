@@ -25,13 +25,11 @@ Future<void> initializeDependencies() async {
   sl.registerSingleton<SharedPreferences>(sharedPreferences);
 
   // Test
-  var url1 = sha1
-      .convert(utf8.encode("https://www.pdf995.com/samples/pdf.pdf"))
-      .toString();
+  var url1 = sha1.convert(utf8.encode("url1")).toString();
   var url2 = sha1.convert(utf8.encode("url2")).toString();
   await sharedPreferences.setStringList('pdf_key_list', <String>[url1, url2]);
   var x = {
-    "url": "https://www.pdf995.com/samples/pdf.pdf",
+    "url": "url1",
     "name": "s1",
     "fileLocation": "C:/Users/Oshan/Downloads/Documents/s1.pdf",
     "isSaved": true

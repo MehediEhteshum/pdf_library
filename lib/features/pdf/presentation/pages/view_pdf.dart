@@ -9,6 +9,7 @@ import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_s
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_bloc.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_event.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_state.dart';
+import 'package:pdf_library/features/pdf/presentation/widgets/bookmark_button.dart';
 import 'package:pdf_library/features/pdf/presentation/widgets/custom_back_button.dart';
 import 'package:pdfx/pdfx.dart';
 
@@ -32,6 +33,16 @@ class _ViewPdfState extends State<ViewPdf> {
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
+        floatingActionButton: BlocBuilder<LocalPdfBloc, LocalPdfState>(
+          buildWhen: (previous, current) => current is LocalPdfReadyState,
+          builder: (context, state) {
+            if (state is LocalPdfReadyState) {
+              return BookmarkButton(pdf: state.pdf!);
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
@@ -94,7 +105,7 @@ class _ViewPdfState extends State<ViewPdf> {
     );
   }
 
-  Center _buildLoadingIndicator() {
+  Widget _buildLoadingIndicator() {
     return const Center(
       child: CupertinoActivityIndicator(
         radius: kToolbarHeight,
@@ -102,7 +113,7 @@ class _ViewPdfState extends State<ViewPdf> {
     );
   }
 
-  PdfView _buildPdfView(PdfController pdfController) {
+  Widget _buildPdfView(PdfController pdfController) {
     return PdfView(
       controller: pdfController,
       scrollDirection: Axis.vertical,
@@ -114,7 +125,7 @@ class _ViewPdfState extends State<ViewPdf> {
     );
   }
 
-  Center _buildErrorWidget() {
+  Widget _buildErrorWidget() {
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
