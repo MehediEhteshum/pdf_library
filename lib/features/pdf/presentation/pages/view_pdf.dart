@@ -47,11 +47,7 @@ class _ViewPdfState extends State<ViewPdf> {
     return BlocBuilder<LocalPdfBloc, LocalPdfState>(
       builder: (context, state) {
         if (state is LocalPdfLoadingState) {
-          return const Center(
-            child: CupertinoActivityIndicator(
-              radius: kToolbarHeight,
-            ),
-          );
+          return _buildLoadingIndicator();
         }
 
         if (state is LocalPdfReadyState) {
@@ -73,11 +69,7 @@ class _ViewPdfState extends State<ViewPdf> {
               child: BlocBuilder<RemotePdfBloc, RemotePdfState>(
                 builder: (context, state) {
                   if (state is RemotePdfLoadingState) {
-                    return const Center(
-                      child: CupertinoActivityIndicator(
-                        radius: kToolbarHeight,
-                      ),
-                    );
+                    return _buildLoadingIndicator();
                   }
 
                   if (state is RemotePdfErrorState || hasDocumentError) {
@@ -99,6 +91,14 @@ class _ViewPdfState extends State<ViewPdf> {
 
         return const SizedBox();
       },
+    );
+  }
+
+  Center _buildLoadingIndicator() {
+    return const Center(
+      child: CupertinoActivityIndicator(
+        radius: kToolbarHeight,
+      ),
     );
   }
 
