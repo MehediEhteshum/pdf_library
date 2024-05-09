@@ -10,7 +10,7 @@ class GetSavedPdfUseCase implements UseCase<PdfEntity, String> {
   GetSavedPdfUseCase(this._pdfRepo);
 
   @override
-  FutureOr<PdfEntity> call({String? params}) {
-    return _pdfRepo.getSavedPdf(params!);
+  FutureOr<PdfEntity> call({String? params}) async {
+    return await _pdfRepo.getSavedPdf(params!);
   }
 }

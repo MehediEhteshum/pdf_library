@@ -29,8 +29,8 @@ class PdfRepoImpl implements PdfRepo {
   }
 
   @override
-  PdfModel getSavedPdf(String url) {
-    return _localPdfService.getSavedPdf(url);
+  Future<PdfModel> getSavedPdf(String url) async {
+    return await _localPdfService.getSavedPdf(url);
   }
 
   @override
@@ -39,7 +39,7 @@ class PdfRepoImpl implements PdfRepo {
   }
 
   @override
-  Future<void> savePdf(PdfEntity article) {
+  Future<void> savePdf(PdfEntity pdf) {
     throw UnimplementedError();
   }
 }

@@ -6,5 +6,6 @@ class PdfModel extends PdfEntity {
     super.name,
     super.fileLocation,
     super.data,
+    super.isSaved,
   });
 }

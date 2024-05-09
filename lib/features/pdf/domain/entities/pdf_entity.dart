@@ -7,9 +7,11 @@ class PdfEntity extends Equatable {
   final String? url;
   final String? name;
   final String? fileLocation;
+  final bool? isSaved;
 
-  const PdfEntity({this.url, this.name, this.fileLocation, this.data});
+  const PdfEntity(
+      {this.isSaved, this.url, this.name, this.fileLocation, this.data});
 
   @override
-  List<Object?> get props => [data, url, name, fileLocation];
+  List<Object?> get props => [data, url, name, fileLocation, isSaved];
 }
