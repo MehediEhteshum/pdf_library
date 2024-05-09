@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_library/config/routes/view_pdf_args.dart';
 import 'package:pdf_library/core/constants/constants.dart';
 
 class UrlInput extends StatefulWidget {
@@ -55,7 +56,7 @@ class _UrlInputState extends State<UrlInput> {
     Navigator.pushNamed(
       context,
       viewPdfRoute,
-      arguments: textEditingController.text,
+      arguments: ViewPdfArgs(textEditingController.text, null),
     );
     textEditingController.text = "";
   }

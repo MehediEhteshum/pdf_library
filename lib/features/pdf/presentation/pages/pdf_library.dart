@@ -7,6 +7,7 @@ import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_b
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_event.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_state.dart';
 import 'package:pdf_library/features/pdf/presentation/widgets/custom_back_button.dart';
+import 'package:pdf_library/features/pdf/presentation/widgets/pdf_tile.dart';
 
 class PdfLibrary extends StatelessWidget {
   const PdfLibrary({super.key});
@@ -55,7 +56,7 @@ class PdfLibrary extends StatelessWidget {
                 itemCount: state.pdfList!.length,
                 itemBuilder: (context, index) {
                   final PdfEntity pdf = state.pdfList![index];
-                  return Text(pdf.name!);
+                  return PdfTile(pdf: pdf);
                 },
               );
             }
