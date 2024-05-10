@@ -32,8 +32,8 @@ class BookmarkButtonHandler extends StatelessWidget {
             String pdfName = pdf.url!
                 .split('/')
                 .last
-                .replaceAll(RegExp(r'[^a-zA-Z0-9]+'), '_')
                 .replaceAll(".pdf", '')
+                .replaceAll(RegExp(r'[^a-zA-Z0-9]+'), '_')
                 .toUpperCase();
             PdfEntity newPdf = PdfEntity(
                 url: pdf.url,

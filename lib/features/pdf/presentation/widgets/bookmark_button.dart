@@ -18,30 +18,34 @@ class BookmarkButton extends StatefulWidget {
 
 class _BookmarkButtonState extends State<BookmarkButton> {
   bool? isSaved;
+  bool hasData = true;
 
   @override
   Widget build(BuildContext context) {
     PdfEntity pdf = widget.pdf;
     isSaved = isSaved ?? pdf.isSaved!;
-    return SizedBox(
-      width: kToolbarHeight,
-      height: kToolbarHeight,
-      child: FittedBox(
-        child: FloatingActionButton(
-          onPressed: () => _onPressed(context, pdf),
-          shape: const CircleBorder(),
-          backgroundColor: Colors.amber,
-          child: Icon(
-            Icons.bookmark,
-            color: isSaved! ? Colors.black : Colors.white,
-          ),
-        ),
-      ),
-    );
+    return hasData
+        ? SizedBox(
+            width: kToolbarHeight,
+            height: kToolbarHeight,
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () => _onPressed(context, pdf),
+                shape: const CircleBorder(),
+                backgroundColor: Colors.amber,
+                child: Icon(
+                  Icons.bookmark,
+                  color: isSaved! ? Colors.black : Colors.white,
+                ),
+              ),
+            ),
+          )
+        : const SizedBox();
   }
 
   void _onPressed(BuildContext context, PdfEntity pdf) {
     if (isSaved!) {
+      // delete
       BlocProvider.of<LocalPdfBloc>(context).add(DeleteLocalPdfEvent(pdf.url!));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -50,6 +54,7 @@ class _BookmarkButtonState extends State<BookmarkButton> {
         ),
       );
     } else {
+      // save
       BlocProvider.of<LocalPdfBloc>(context).add(SaveLocalPdfEvent(pdf));
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -61,6 +66,7 @@ class _BookmarkButtonState extends State<BookmarkButton> {
 
     setState(() {
       isSaved = !isSaved!;
+      hasData = (pdf.data != null) ? true : false;
     });
   }
 }
