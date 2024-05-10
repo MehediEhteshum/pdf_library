@@ -9,7 +9,7 @@ import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_s
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_bloc.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_event.dart';
 import 'package:pdf_library/features/pdf/presentation/bloc/pdf/remote/remote_pdf_state.dart';
-import 'package:pdf_library/features/pdf/presentation/widgets/bookmark_button.dart';
+import 'package:pdf_library/features/pdf/presentation/widgets/bookmark_button_handler.dart';
 import 'package:pdf_library/features/pdf/presentation/widgets/custom_back_button.dart';
 import 'package:pdfx/pdfx.dart';
 
@@ -42,7 +42,7 @@ class _ViewPdfState extends State<ViewPdf> {
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
-        floatingActionButton: BookmarkButton(
+        floatingActionButton: BookmarkButtonHandler(
           pdfUrlDataNotifier: pdfUrlDataNotifier,
           pdf: statePdf,
         ),

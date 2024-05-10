@@ -39,14 +39,10 @@ class LocalPdfBloc extends Bloc<LocalPdfEvent, LocalPdfState> {
   Future<void> onSaveLocalPdfEvent(
       SaveLocalPdfEvent event, Emitter<LocalPdfState> emit) async {
     await _savePdfUseCase(params: event.pdf);
-    final List<PdfEntity> pdfList = await _getSavedPdfListUseCase();
-    emit(LocalPdfListReadyState(pdfList));
   }
 
   Future<void> onDeleteLocalPdfEvent(
       DeleteLocalPdfEvent event, Emitter<LocalPdfState> emit) async {
     await _deleteSavedPdfUseCase(params: event.url);
-    final List<PdfEntity> pdfList = await _getSavedPdfListUseCase();
-    emit(LocalPdfListReadyState(pdfList));
   }
 }

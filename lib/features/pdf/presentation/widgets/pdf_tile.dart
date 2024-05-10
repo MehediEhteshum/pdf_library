@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pdf_library/core/constants/constants.dart';
 import 'package:pdf_library/features/pdf/domain/entities/pdf_entity.dart';
+import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_bloc.dart';
+import 'package:pdf_library/features/pdf/presentation/bloc/pdf/local/local_pdf_event.dart';
 
 class PdfTile extends StatefulWidget {
   const PdfTile({
@@ -70,7 +73,12 @@ class _PdfTileState extends State<PdfTile> with SingleTickerProviderStateMixin {
         context,
         viewPdfRoute,
         arguments: widget.pdf,
-      );
+      ).then((_) {
+        if (ModalRoute.of(context)!.settings.name == pdfLibraryRoute) {
+          BlocProvider.of<LocalPdfBloc>(context)
+              .add(const GetLocalPdfListEvent());
+        }
+      });
       _animationController.reset();
     });
   }
