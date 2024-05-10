@@ -1,2 +1,2 @@
 # PDF Library
-Cross-platform app using flutter for storing blob files using persistent storage.
+Cross-platform app using flutter (clean architecture and bloc state management) for storing blob files using persistent storage.
