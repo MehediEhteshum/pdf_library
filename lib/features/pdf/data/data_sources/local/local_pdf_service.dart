@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:path/path.dart' as path;
 
 import 'package:crypto/crypto.dart';
 import 'package:path_provider/path_provider.dart';
@@ -78,8 +79,9 @@ class LocalPdfService {
     // write data to file
     final docDirectory = await getApplicationDocumentsDirectory();
     final appDocDirectory =
-        await Directory("${docDirectory.path}/PDF Library").create();
-    File file = File('$appDocDirectory/${pdf.name!}.pdf');
+        await Directory(path.join(docDirectory.path, 'PDF Library'))
+            .create(recursive: true);
+    File file = File(path.join(appDocDirectory.path, '${pdf.name}.pdf'));
     file = await file.writeAsBytes(pdf.data!);
 
     // update _sharedPreferences

@@ -24,24 +24,27 @@ class ViewPdf extends StatefulWidget {
 
 class _ViewPdfState extends State<ViewPdf> {
   bool hasDocumentError = false;
+  late PdfEntity statePdf;
+  ValueNotifier<dynamic> pdfUrlDataNotifier = ValueNotifier<dynamic>(0);
+
+  @override
+  void dispose() {
+    pdfUrlDataNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    statePdf = widget.pdf;
     return BlocProvider<LocalPdfBloc>(
       create: (context) =>
           sl<LocalPdfBloc>()..add(GetLocalPdfEvent(widget.pdf.url!)),
       child: Scaffold(
         appBar: _buildAppBar(),
         body: _buildBody(),
-        floatingActionButton: BlocBuilder<LocalPdfBloc, LocalPdfState>(
-          buildWhen: (previous, current) => current is LocalPdfReadyState,
-          builder: (context, state) {
-            if (state is LocalPdfReadyState) {
-              return BookmarkButton(pdf: state.pdf!);
-            } else {
-              return const SizedBox();
-            }
-          },
+        floatingActionButton: BookmarkButton(
+          pdfUrlDataNotifier: pdfUrlDataNotifier,
+          pdf: statePdf,
         ),
       ),
     );
@@ -62,7 +65,7 @@ class _ViewPdfState extends State<ViewPdf> {
         }
 
         if (state is LocalPdfReadyState) {
-          PdfEntity statePdf = state.pdf!;
+          statePdf = state.pdf!;
           if (statePdf.isSaved!) {
             // open local pdf
             if (hasDocumentError) {
@@ -88,8 +91,9 @@ class _ViewPdfState extends State<ViewPdf> {
                   }
 
                   if (state is RemotePdfReadyState) {
+                    statePdf = state.pdf!;
                     PdfController pdfController = PdfController(
-                        document: PdfDocument.openData(state.pdf!.data!));
+                        document: PdfDocument.openData(statePdf.data!));
                     return _buildPdfView(pdfController);
                   }
 
@@ -114,6 +118,9 @@ class _ViewPdfState extends State<ViewPdf> {
   }
 
   Widget _buildPdfView(PdfController pdfController) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pdfUrlDataNotifier.value = statePdf.data;
+    });
     return PdfView(
       controller: pdfController,
       scrollDirection: Axis.vertical,
@@ -126,6 +133,9 @@ class _ViewPdfState extends State<ViewPdf> {
   }
 
   Widget _buildErrorWidget() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pdfUrlDataNotifier.value = 1;
+    });
     return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
