@@ -18,7 +18,6 @@ final sl = GetIt.instance;
 Future<void> initializeDependencies() async {
   final SharedPreferences sharedPreferences =
       await SharedPreferences.getInstance();
-  await sharedPreferences.setStringList('pdf_key_list', <String>[]);
   sl.registerSingleton<SharedPreferences>(sharedPreferences);
 
   sl.registerSingleton<PdfUrlService>(PdfUrlService());
