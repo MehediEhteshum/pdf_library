@@ -23,6 +23,14 @@ Cross-platform app using Flutter (clean architecture and bloc state management) 
 ![image](https://github.com/MehediEhteshum/pdf_library/assets/65057419/5694d775-28c5-432c-a709-cd7f36acebaf)
 ![image](https://github.com/MehediEhteshum/pdf_library/assets/65057419/12158f7c-679f-4069-8461-0b062ce56dff)
 ![image](https://github.com/MehediEhteshum/pdf_library/assets/65057419/701de588-1b50-4a7c-8eba-96dcd0849ec7)
+</br>
+
+<h2>Support</h2>
+
+☕☕☕ If this project helps you understand the concepts around the topic, please consider buying me a coffee
+<br>
+☕☕☕
+<a href="https://coindrop.to/mehedi_ehteshum" target="_blank"><img src="https://coindrop.to/embed-button.png" style="border-radius: 10px; height: 57px !important;width: 229px !important;" alt="Coindrop.to me"></img></a>
 
 
 
